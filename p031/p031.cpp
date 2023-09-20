@@ -19,18 +19,24 @@ uint64_t solveProblem(uint64_t upperBound)
 {
     uint64_t result = 0;
     // Your solution code goes here
-    vector<int> coins = {1,2,5,10,20,50,100,200};
-    
-
+    const vector<int> coins = {1,2,5,10,20,50,100,200};
+    vector<uint64_t> T(upperBound+1);
+    T[0] = 1;
+    for (auto it = coins.begin() ; it != coins.end(); ++it){
+        for (size_t j = *it; j <= upperBound; ++j){
+            T[j] += T[j - *it];
+        }
+    }
 
     // Return the result
+    result = T[upperBound];
     return result;
 }
 int main()
 {
     cout << "*******************************" << endl;
     cout << "* Project Euler - Problem 31  *" << endl;
-    cout << "*        Answer:     ????     *" << endl;
+    cout << "*        Answer:    73682     *" << endl;
     cout << "*******************************" << endl;
 
     //Declare your variables 
